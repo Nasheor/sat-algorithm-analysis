@@ -20,7 +20,7 @@ def solve(chromosomes, num_genes, chromosome_fitness, generations=50):
     4 - Mutation
     5 - Fitness function
     """
-    print("c Applying GA Algorithm")
+    print("c Applying GA")
     # 1 - Initial Population
     current_configuration = localsearch.random_value_assignment(num_genes)
 
@@ -136,7 +136,7 @@ def generate_children(parent_pair):
             second_child = parent_pair[1][:cut_point] + parent_pair[0][cut_point:]
 
         else:
-            if len(parent_pair[1] > len(parent_pair[1])):
+            if len(parent_pair[1]) > len(parent_pair[0]):
                 size = len(parent_pair[0])
                 if size == 1:
                     first_point = 0
