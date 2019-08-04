@@ -7,8 +7,9 @@ import matplotlib.pyplot as plt
 def generate_plots_for_gwsat(filename):
     clauses, num_vars = parsed_cnf_file(filename)
 
+    flips = len(clauses)//2
     time_values, clauses_sat, random_walk_time, random_walk_result, choose_and_flip_time, choose_and_flip_result = \
-        gwsat.solve(num_vars, clauses, len(clauses)//2, 0.4)
+        gwsat.solve(num_vars, clauses, flips, 0.4)
 
     steps = [step + 1 for step in range(len(clauses)//2)]
 

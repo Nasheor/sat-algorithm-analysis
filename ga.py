@@ -136,8 +136,20 @@ def generate_children(parent_pair):
             second_child = parent_pair[1][:cut_point] + parent_pair[0][cut_point:]
 
         else:
-            first_point = random.randint(0, int(len(parent_pair[0])/2)-1)
-            second_point = random.randint(first_point, int(len(parent_pair[0])/2))
+            if len(parent_pair[1] > len(parent_pair[1])):
+                size = len(parent_pair[0])
+                if size == 1:
+                    first_point = 0
+                else:
+                    first_point = random.randint(0, int(len(parent_pair[0])/2))
+                second_point = random.randint(first_point, len(parent_pair[0]))
+            else:
+                size = len(parent_pair[1])
+                if size == 1:
+                    first_point = 0
+                else:
+                    first_point = random.randint(0, int(len(parent_pair[1])/2))
+                second_point = random.randint(first_point, len(parent_pair[1]))
 
             first_child = parent_pair[0][:first_point] + \
                 parent_pair[1][first_point:second_point] + \
