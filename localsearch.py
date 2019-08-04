@@ -43,6 +43,13 @@ def choose_and_flip(clauses, current_configuration, list_sat_clauses=None):
     """
     chosen_var = random.randint(0, len(current_configuration))
 
+    # Choosing a unsatisfied clause
+    for clause in list_sat_clauses.keys():
+        if not list_sat_clauses[clause]:
+            tmp = clause.split()
+            var = random.randint(0, len(tmp)-1)
+            chosen_var = abs(int(tmp[var]))
+
     new_configuration = current_configuration.copy()
     new_configuration[chosen_var-1] = not new_configuration[chosen_var-1]
 
