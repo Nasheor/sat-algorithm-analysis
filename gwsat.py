@@ -24,7 +24,7 @@ def solve(num_vars, clauses, num_flips, wp, steps=50):
 
     """
     max_sat_clauses = 0
-    print("c Using GWSAT Algorithm")
+    print("c Applying GWSAT Algorithm")
     clauses_sat = list()
     time_values = list()
     random_walk_result = list()

@@ -20,7 +20,7 @@ def solve(chromosomes, num_genes, chromosome_fitness, generations=50):
     4 - Mutation
     5 - Fitness function
     """
-    print("c Using GA Algorithm")
+    print("c Applying GA Algorithm")
     # 1 - Initial Population
     current_configuration = localsearch.random_value_assignment(num_genes)
 

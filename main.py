@@ -98,7 +98,7 @@ def parsed_cnf_file(filename):
                 if first_line[1] != "cnf":
                     print("Invalid File Type. File type has to be CNF")
                     exit(0)
-
+    print("Successfully read file ", filename)
     return clauses, num_vars
 
 
@@ -182,6 +182,7 @@ def parsed_wcnf_file(filename):
                 if first_line[1] != "wcnf":
                     print("Invalid File Type. File type has to be CNF")
 
+    print("Successfully read file ", filename)
     return chromosomes, num_genes, chromosome_fitness,  top_fitness
 
 
