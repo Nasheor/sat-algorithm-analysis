@@ -104,11 +104,12 @@ def parsed_cnf_file(filename):
 
 
 def generate_plots_for_ga(filename):
-    chromosomes, num_genes, chromosome_fitness, top_fitness = parsed_wcnf_file(filename)
 
     generations = [generation+1 for generation in range(50)]
 
+    chromosomes, num_genes, chromosome_fitness, top_fitness = parsed_wcnf_file(filename)
     fitness_values_single, time_values_single = ga.solve(chromosomes, num_genes, chromosome_fitness, operation="single")
+    chromosomes, num_genes, chromosome_fitness, top_fitness = parsed_wcnf_file(filename)
     fitness_values_two, time_values_two = ga.solve(chromosomes, num_genes, chromosome_fitness, operation="two")
 
     print("c Generating graphs for GA single point crossover")
