@@ -107,10 +107,25 @@ def generate_plots_for_ga(filename):
     chromosomes, num_genes, chromosome_fitness, top_fitness = parsed_wcnf_file(filename)
 
     generations = [generation+1 for generation in range(50)]
-    fitness_values, time_values = ga.solve(chromosomes, num_genes, chromosome_fitness)
 
-    print("c Generating graphs for GA")
+    fitness_values_single, time_values_single = ga.solve(chromosomes, num_genes, chromosome_fitness, operation="single")
+    fitness_values_two, time_values_two = ga.solve(chromosomes, num_genes, chromosome_fitness, operation="two")
 
+    print("c Generating graphs for GA single point crossover")
+    generate_plots_helper(fitness_values_single, time_values_single, generations)
+    print("c Generating graphs for GS two point crossover")
+    generate_plots_helper(fitness_values_two, time_values_two, generations)
+    print("c Single Point vs Two Point")
+    plt.title("RTD graph for Single Point Crossover vs Two-Point Crossover")
+    category = ["Max Fitness value Single Point", " Max Fitness value Two Point"]
+    bars = plt.bar(category, [max(fitness_values_single), max(fitness_values_two)])
+    for bar in bars:
+        val = bar.get_height()
+        plt.text(bar.get_x(), val + .0055, val)
+    plt.show()
+
+
+def generate_plots_helper(fitness_values, time_values, generations):
     # Plotting RTD graph for time vs generations
     plt.title("RTD graph for Time VS Generations")
     plt.plot(time_values, generations)
@@ -131,7 +146,6 @@ def generate_plots_for_ga(filename):
     plt.ylabel("Fitness")
     plt.xlabel("Time")
     plt.show()
-
 
 def parsed_wcnf_file(filename):
     """

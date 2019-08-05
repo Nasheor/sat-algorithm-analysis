@@ -5,7 +5,7 @@ import math
 import time
 
 
-def solve(chromosomes, num_genes, chromosome_fitness, generations=50):
+def solve(chromosomes, num_genes, chromosome_fitness, operation, generations=50):
     """
     :param chromosomes: Number of Clauses
     :param num_genes: Number of variables
@@ -20,7 +20,7 @@ def solve(chromosomes, num_genes, chromosome_fitness, generations=50):
     4 - Mutation
     5 - Fitness function
     """
-    print("c Applying GA")
+    print("c Applying GA using ", operation)
     # 1 - Initial Population
     current_configuration = localsearch.random_value_assignment(num_genes)
 
@@ -40,7 +40,7 @@ def solve(chromosomes, num_genes, chromosome_fitness, generations=50):
         for parent_pair in parent_pairs:
 
             # 3 - Generate Children from Parent pairs using either single point crossover or two point crossover
-            children = generate_children(parent_pair)
+            children = generate_children(parent_pair, operation)
 
             # 4 - Mutating the child chromosomes formed from crossover
             mutated_children = list()
@@ -61,7 +61,7 @@ def solve(chromosomes, num_genes, chromosome_fitness, generations=50):
             index += 1
         print("Generation: ", generation+1, " of Generation: ", generations)
         total_fitness = functools.reduce(lambda total, w: total + int(w), chromosome_fitness)
-        print("Top Fitness: ", total_fitness)
+        print("Total Fitness: ", total_fitness)
         end = time.time()
         fitness_values.append(total_fitness)
         time_values.append(end - start)
@@ -119,7 +119,7 @@ def generate_mating_pool(chromosomes, chromosome_fitness, num_of_pairs):
     return parents, fitness
 
 
-def generate_children(parent_pair):
+def generate_children(parent_pair, operation):
     """
     :param parent_pair: [chromosome-1, chromosome-2] upon which the crossover will be done
     :return: list, list
@@ -128,11 +128,10 @@ def generate_children(parent_pair):
     a single point crossover or double point crossover is 50%
 
     """
-    do_single_point_crossover = random.choice([True, False])
     first_child = None
     second_child = None
     if len(parent_pair) == 2:
-        if do_single_point_crossover:
+        if operation == "single":
             cut_point = random.randint(0, int(len(parent_pair[0])/2))
             first_child = parent_pair[0][:cut_point] + parent_pair[1][cut_point:]
             second_child = parent_pair[1][:cut_point] + parent_pair[0][cut_point:]
