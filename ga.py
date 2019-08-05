@@ -25,7 +25,7 @@ def solve(chromosomes, num_genes, chromosome_fitness, generations=50):
     current_configuration = localsearch.random_value_assignment(num_genes)
 
     # Number of pairs that should be picked to mate
-    num_of_pairs = int(len(chromosomes)/2)
+    num_of_pairs = 50
 
     # Mutation Probability
     mutation_rate = 1 / len(chromosomes)
@@ -59,9 +59,11 @@ def solve(chromosomes, num_genes, chromosome_fitness, generations=50):
                     chromosomes[worst_genome] = child
                     chromosome_fitness[worst_genome] = child_fitness
             index += 1
-
+        print("Generation: ", generation+1, " of Generation: ", generations)
+        total_fitness = functools.reduce(lambda total, w: total + int(w), chromosome_fitness)
+        print("Top Fitness: ", total_fitness)
         end = time.time()
-        fitness_values.append(functools.reduce(lambda total, w: total + int(w), chromosome_fitness))
+        fitness_values.append(total_fitness)
         time_values.append(end - start)
     return fitness_values, time_values
 
